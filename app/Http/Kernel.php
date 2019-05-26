@@ -13,6 +13,8 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+
+    //應用程式共用中介層
     protected $middleware = [
         \App\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
@@ -26,6 +28,8 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+
+    //路由中介層群組
     protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
@@ -50,7 +54,11 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+
+    //應用程式中介層
     protected $routeMiddleware = [
+        'user.auth.admin' => \App\Http\Middleware\AuthUserAdminMiddleware::class,
+        'user.auth' => \App\Http\Middleware\AuthUserMiddleware::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,

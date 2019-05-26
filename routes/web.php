@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +21,19 @@ Route::get('/', 'HomeController@indexPage');
 
 //UserPage
 Route::group(['prefix' => 'user'], function () {
+    //使用者驗證
     Route::group(['prefix' => 'auth'], function () {
+        //使用者註冊頁面
         Route::get('/sign-up', 'UserAuthController@signUpPage');
+        //使用者資料新增
         Route::post('/sign-up', 'UserAuthController@signUpProcess');
 
+        //使用者登入頁面
         Route::get('/sign-in', 'UserAuthController@signInPage');
+        //使用者登入處理
         Route::post('/sign-in', 'UserAuthController@signInProcess');
 
+        //使用者登出
         Route::get('/sign-out', 'UserAuthController@signOut');
     });
 });
@@ -42,19 +49,28 @@ Route::get('user/auth/sign-out', 'UserAuthController@signOut');
 
 //Merchandise
 Route::group(['prefix' => 'merchandise'], function () {
+    //商品清單檢視
     Route::get('/', 'MerchandiseController@merchandiseListPage');
-    Route::get('/create', 'MerchandiseController@merchandiseCreateProcess');
+    //商品資料新增
+    Route::get('/create', 'MerchandiseController@merchandiseCreateProcess')->middleware(['user.auth.admin']);
+    //商品管理清單檢視
+    Route::get('/manage', 'MerchandiseController@merchandiseManageListPage')->middleware(['user.auth.admin']);
 
-    Route::get('/manage', 'MerchandiseController@merchandiseManageListPage');
-
+    //指定商品
     Route::group(['prefix' => '{merchandise_id}'], function () {
+        //商品單品檢視
         Route::get('/', 'MerchandiseController@merchandiseItemPage');
 
-        Route::get('/edit', 'MerchandiseController@merchandiseItemEditPage');
+        //購買商品
+        Route::post('/buy', 'MerchandiseController@merchandiseItemBuyProcess')->middleware(['user.auth']);
 
-        Route::put('/', 'MerchandiseController@merchandiseItemUpdateProcess');
+        Route::group(['middleware' => ['user.auth.admin']], function () {
+            //商品單品編輯頁面檢視
+            Route::get('/edit', 'MerchandiseController@merchandiseItemEditPage');
 
-        Route::post('/buy', 'MerchandiseController@merchandiseItemBuyProcess');
+            //商品單品資料修改
+            Route::put('/', 'MerchandiseController@merchandiseItemUpdateProcess');
+        });
     });
 });
 /*

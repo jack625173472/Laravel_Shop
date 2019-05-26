@@ -6,16 +6,32 @@
 
 <!-- 傳送資料到母模板，並指定變數為 content -->
 @section('content')
+    <div class="container">
+		<h1>{{$title}}</h1>
 
-    <h1>{{$title}}</h1>
+		<!-- 錯誤訊息模板元件 -->
+		@include('components.validationErrorMessage')
+		
+		<form action="/user/auth/sign-in" method="POST">
+			<label>
+				Email：
+				<input type="text"
+					   name="email"
+					   placeholder="Email"
+					   value="{{ old('email') }}">
+			</label>
+			<label>
+				密碼：
+				<input type="password"
+					   name="password"
+					   placeholder="密碼"
+					   value="{{ old('password') }}">
+			</label>
 
-    <!-- 載入模板元件 components.socialButtons -->
-    @include('components.socialButtons')
+			<button type="submit">登入</button>
 
-    Email:
-    <input type="text" name="email" placeholder="Email">
-
-    Password:
-    <input type="password" name="password" placeholder="Password">
-
+			<!-- CSRF 欄位 -->
+			{!! csrf_field() !!}
+		</form>
+    </div>
 @endsection
