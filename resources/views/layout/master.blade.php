@@ -40,7 +40,7 @@
             <nav class="navbar navbar-inverse navbar-fixed-bottom">
                 <div class="container">
                     <div class="nav navbar-nav col-lg-10">
-                        <p style="color:#9d9d9d">Copyright © 2019 長榮大學 Cai Yu Xuan & Chang Ting Tsung 版權所有，並保留所有權利。</p>
+                        <p style="color:#9d9d9d">Copyright © 2019 長榮大學 IM2A Cai Yu Xuan & Chang Ting Tsung 版權所有，並保留所有權利。</p>
                     </div>
                     <div class="nav navbar-right col-lg-1"><a href="#" title="回頂端"><i class="fa fa-sort-asc"></i>TOP</a></div>
                     <div class="nav navbar-right col-lg-1"><a href='#'>聯絡我們</a></div>

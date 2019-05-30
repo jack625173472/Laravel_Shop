@@ -89,4 +89,4 @@ Route::post('/merchandise/{merchandise_id}/buy', 'MerchandiseController@merchand
 */
 
 //Transaction
-Route::get('/transaction', 'TransactionController@transactionListPage');
+Route::get('/transaction', 'TransactionController@transactionListPage')->middleware(['user.auth']);

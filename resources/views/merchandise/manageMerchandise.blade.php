@@ -27,7 +27,8 @@
                     <td> {{ $Merchandise->id }} </td>
                     <td> {{ $Merchandise->name }} </td>
                     <td>
-                        <img src="{{ $Merchandise->photo or '/assets/images/default-merchandise.png' }}" />
+                        <script>console.log({{$Merchandise->photo}})</script>
+                        <img src="{{ $Merchandise->photo or '/assets/images/default-merchandise.png'}}" />
                     </td>
                     <td>
                         @if($Merchandise->status == 'C')
