@@ -16,7 +16,8 @@ class CreateUsersTable extends Migration
         //建立資料表
         Schema::create('users', function (Blueprint $table) {
             //會員編號
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             //Email
             $table->string('email', 150);
             //密碼

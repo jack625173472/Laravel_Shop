@@ -17,7 +17,8 @@ class CreateMerchandiseTable extends Migration
     {
         Schema::create('merchandise', function (Blueprint $table) {
             //商品編號
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             //標記商品狀態，已上架的商品才可被消費者看見
             //-C (Create):建立中
             //-S (Sell):可販售

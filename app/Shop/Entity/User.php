@@ -2,8 +2,20 @@
 namespace App\Shop\Entity;
 
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Uuid;
 
 class User extends Model {
+    //取消自動編號
+    public $incrementing = false;
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
+        });
+    }
+
     //資料表名稱
     protected $table = 'users';
 

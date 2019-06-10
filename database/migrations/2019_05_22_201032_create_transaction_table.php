@@ -17,7 +17,8 @@ class CreateTransactionTable extends Migration
     {
         Schema::create('transaction', function (Blueprint $table) {
             //交易編號
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             //使用者編號
             $table->integer('user_id');
             //商品編號
